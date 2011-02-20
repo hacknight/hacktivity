@@ -1,0 +1,43 @@
+<html>
+<head> 
+	<script src = "processing-1.0.0.min.js" />  
+	
+	<script type = "text/javascript">
+		           
+		
+		function moveBall()
+		{          
+					 var p = Processing.instances[0];   
+
+			p.getBall(0).activate(); //first ball
+		}                       
+		
+		 function addBall()
+		{    
+					 var p = Processing.instances[0];   
+
+			p.addBall(); 
+		}      
+		
+		function moveAllBalls()
+		{         
+					 var p = Processing.instances[0];   
+
+			p.moveAllBalls();
+		}
+
+	</script>
+	   
+</head> 
+
+             
+<body>
+
+	<canvas id = "github" data-processing-sources="github.pjs"></canvas>
+	<button onclick = "moveBall();" >Move Ball</button>  
+	<button onclick = "addBall();" >Add Ball</button>  
+	<button onclick = "moveAlBalls();" >Move All Balls</button>  
+	
+</body>
+
+</html>
