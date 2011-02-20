@@ -1,0 +1,37 @@
+<html>
+  <head>
+    <script src="jquery-1.5.min.js"></script>
+    <script src="raphael-min.js"></script>
+    <script type="text/javascript">
+    $(function(){
+      // Creates canvas 320 × 200 at 10, 50
+      var paper = Raphael(10, 50, 320, 200);
+      
+      // Creates circle at x = 50, y = 40, with radius 10
+      var circle = paper.circle(50, 30, 10);
+      circle.attr({fill: "#f00", stroke: "#f00", opacity: 0.5});
+      
+      var circle2 = paper.circle(50, 30, 10);
+      circle2.attr({fill: "#f00", stroke: "#f00", opacity: 0.5});
+      
+      // rectangle with rounded corners
+      var rect = paper.rect(60, 60, 50, 50, 10);
+      
+      var t = paper.text(80, 175, "Animate those circles");
+      
+      setTimeout(function() {
+          //;
+          circle2.animate({
+            "80%": {cy: 85, cx: 85, easing: '<>'},
+          }, 5000)
+      }, 1000);
+      
+      var c = paper.circle(50, 30, 10);
+      c.animate({cx: 50, r: 20}, 2000, "bounce");
+
+    });
+    </script>
+  </head>
+  <body>
+  </body>
+</html>
