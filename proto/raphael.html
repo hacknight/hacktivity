@@ -1,0 +1,43 @@
+<html>
+  <head>
+    <title>Raphael hacktivity prototype</title>
+    <style>
+      body{
+        background-color: black;
+        color: #eee;
+      }
+    </style>
+    <script src="jquery-1.5.min.js"></script>
+    <script src="raphael-min.js"></script>
+    <script src="hacker.js"></script>
+    <script type="text/javascript">
+      $(function(){
+
+        // set up the room
+        var room = Raphael(20, 75, 320, 200);
+        var hackers = [];
+        
+        // delay ...
+        setTimeout(function(){
+          add_hacker();
+        }, 2000);
+        
+        // add a hacker to the room
+        function add_hacker(){
+          // new hacker
+          var h = new Hacker(hackers.length, room, {x: Math.random()*200, y: Math.random()*175 }); // can pass in options ... how?
+          hackers.push(h);
+          h.arrive();
+        };
+        
+      $('#add-hacker').click(function(){
+        add_hacker();
+      });        
+      });
+    </script>
+  </head>
+  <body>
+    <h3>hacktivity</h3>
+    <a id='add-hacker' href="#">Add a hacker to the room</a>
+  </body>
+</html>

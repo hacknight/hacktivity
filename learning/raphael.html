@@ -5,11 +5,16 @@
     <script type="text/javascript">
     $(function(){
       // Creates canvas 320 × 200 at 10, 50
-      var paper = Raphael(10, 50, 320, 200);
+      var paper = Raphael(20, 75, 320, 200);
+      
+      var wiggling = true;
+      var startx = 50;
+      var starty = 30;
+      var startr = 10;
       
       // Creates circle at x = 50, y = 40, with radius 10
-      var circle = paper.circle(50, 30, 10);
-      circle.attr({fill: "#f00", stroke: "#f00", opacity: 0.5});
+      var circle = paper.circle(startx, starty, startr);
+      circle.attr({fill: "#f00", stroke: "#f00", opacity: 1});
       
       var circle2 = paper.circle(50, 30, 10);
       circle2.attr({fill: "#f00", stroke: "#f00", opacity: 0.5});
@@ -19,19 +24,59 @@
       
       var t = paper.text(80, 175, "Animate those circles");
       
+      // move circle2 diagnonally
       setTimeout(function() {
-          //;
-          circle2.animate({
-            "80%": {cy: 85, cx: 85, easing: '<>'},
-          }, 5000)
+          circle2.animate({cy: 85, cx: 85, easing: '<>'}, 1500);
       }, 1000);
       
+      // outline
       var c = paper.circle(50, 30, 10);
       c.animate({cx: 50, r: 20}, 2000, "bounce");
-
+      
+      wiggle();
+      
+      function wiggle(){
+        // make ball wiggle
+        setTimeout(function(){
+          randx = Math.random()*4;
+          randy = Math.random()*4;
+          if (wiggling){
+            circle.animate({cy: randy + starty, cx: randx + startx, easing: '<>'}, 300);
+          };
+          console.log('wiggle ...');
+          wiggle();
+        }, 300);
+      };
+      
+      function pulse(){
+        console.log('pulse ...');
+        wiggling = false;
+        // make the ball say something
+        circle.toFront();
+        circle.animate({
+          // have it pulse and say something
+          r: 30
+        }, 300, function(){ return_to_start() });
+      };
+      
+      function return_to_start(){
+        circle.animate({
+          r: startr
+        }, 1500, "bounce", function(){ wiggling = true });
+      };
+      
+      circle.click(function(e){
+        pulse();
+      });
+      
+      $('#pulse-button').click(function(){
+        pulse();
+      });
     });
     </script>
   </head>
   <body>
+    <h3>Raphael.js</h3>
+    <button id='pulse-button'>Pulse</button>
   </body>
 </html>
